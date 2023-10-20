@@ -1,5 +1,4 @@
-// https://www.youtube.com/watch?v=bI6e6qjJ8JQ
-
+// https://www.youtube.com/watch?v=bI6e6qjJ8JQ - REFERENCE
 // -----------------------------------------------------------------------------------
 
 /* This is a simple code for making a Snake game from java swing library
