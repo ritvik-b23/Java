@@ -45,19 +45,6 @@ class Checker {
     }
 
     public static boolean idCheck(String id) throws IdInvalidException {
-        // if (id.length()>6) { return false; }
-
-        // if (Character.isAlphabetic(id.charAt(0)) && Character.isAlphabetic(id.charAt(5))) {
-        //     for (int i = 1; i < 5; i++) {
-        //         if (Character.isDigit(id.charAt(i))) {
-        //             return true;
-        //         }
-        //         else return false;
-        //     }
-        // }
-        // else return false;
-        // return false;
-
         if (id.length() == 6) {
             if (Character.isAlphabetic(id.charAt(0)) && Character.isAlphabetic(id.charAt(5))) {
                 for (int i = 1; i < 5; i++) {
