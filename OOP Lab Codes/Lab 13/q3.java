@@ -1,60 +1,65 @@
-import java.util.*;
+class SumToN implements Runnable {
 
-class MainThread implements Runnable {
-    Scanner sc = new Scanner(System.in);
-    private Thread t;
-    private String threadName;
-    public MainThread(String threadName) { this.threadName = threadName; }
+    private int start, end;
+    private int result = 0;
+
+    public SumToN(int s, int e) {
+        start = s;
+        end = e;
+    }
 
     public void run() {
-        int num,n,sumRange;
-        System.out.println("Running "+threadName);
-        try {
-            System.out.print("Enter number: "); num = sc.nextInt();
-            System.out.print("Enter the number of threads to use: "); n = sc.nextInt(); 
-            sumRange = num/n;
-            for (int i = 0; i < sumRange; i++) {
-                SubThread st = new SubThread(String.format("Thread %d", i));
-                st.start();
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println("Thread "+threadName+" interrupted.");
+        int sum = 0;
+        for (int i = start; i <= end; i++) {
+            sum += i;
+            String name = Thread.currentThread().getName();
+            System.out.println(name + " : i = " + i + " sum = " + sum);
         }
-        System.out.println("Thread "+threadName+" exiting.");
+        result = sum;
     }
 
-    public void start() {
-        System.out.println("Starting " + threadName);
-        if(t == null) {
-            t = new Thread(this, threadName);
-            t.start();
-        }
+    public int getResult() {
+        return result;
     }
-}
 
-class SubThread implements Runnable  {
-    private Thread t;
-    private String threadName;
-    public SubThread(String threadName) { this.threadName = threadName; }
-    public void run() {
-        System.out.println("Running SubThread "+threadName);
-        try {
-            
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-    }
-    public void start() {
-        System.out.println("Starting " + threadName);
-        if(t == null) {
-            t = new Thread(this, threadName);
-            t.start();
-        }
+    public void display() {
+        System.out.println(result);
     }
 }
 
 public class q3 {
+
     public static void main(String[] args) {
-        
+        Runnable r1 = new SumToN(1, 5);
+        Runnable r2 = new SumToN(6, 10);
+        Runnable r3 = new SumToN(11, 15);
+        Thread t1 = new Thread(r1);
+        Thread t2 = new Thread(r2);
+        Thread t3 = new Thread(r3);
+        t1.start();
+        t2.start();
+        t3.start();
+        System.out.println("main thread: waiting begin");
+        try {
+            t1.join();
+            System.out.println("t1 : joined");
+            t2.join();
+            System.out.println("t2 : joined");
+            t3.join();
+            System.out.println("t3 : joined");
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("main thread: waiting end");
+        SumToN s1 = (SumToN) r1;
+        SumToN s2 = (SumToN) r2;
+        SumToN s3 = (SumToN) r3;
+
+        s1.display();
+        s2.display();
+        s3.display();
+
+        int sum = s1.getResult() + s2.getResult() + s3.getResult();
+        System.out.println("Sum = : " + sum);
     }
 }
