@@ -53,16 +53,17 @@ public class INRtoUSD extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         double inr, usd;
         DecimalFormat df = new DecimalFormat("#0.000");
+        final double usd_to_inr = 83.3;
 
         if (e.getSource() == inrButton) {
             inr = Double.parseDouble(textFieldINR.getText());
-            usd = inr*0.012;
+            usd = inr/usd_to_inr;
             textFieldUSD.setText(String.valueOf(df.format(usd)));
         }
 
         if (e.getSource() == usdButton) {
-            usd = Integer.parseInt(textFieldUSD.getText());
-            inr = usd*83.3;
+            usd = Double.parseDouble(textFieldUSD.getText());
+            inr = usd*usd_to_inr;
             textFieldINR.setText(String.valueOf(df.format(inr)));
         }
 
