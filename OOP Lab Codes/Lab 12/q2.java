@@ -11,13 +11,12 @@ class Book implements Comparable<Book> {
         this.cost = cost;
     }
 
-    
+
     public String getName() { return name; }
     public double getCost() { return cost; }
-    
+
     @Override
     public int compareTo(Book temp) {
-
         return getName().compareTo(temp.getName());
     }
 

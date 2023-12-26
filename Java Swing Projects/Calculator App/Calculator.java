@@ -76,6 +76,7 @@ public class Calculator implements ActionListener{
         delButton.setBounds(150, 430, 100, 50);   // x and y are with reference of top left corner
         clrButton.setBounds(250, 430, 100, 50);
 
+
         panel = new JPanel();
         panel.setBounds(50, 100, 300, 300);
         panel.setLayout(new GridLayout(4,4,10,10));
@@ -108,10 +109,6 @@ public class Calculator implements ActionListener{
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        Calculator clac = new Calculator();
-
-    }
 
     @Override
     public void actionPerformed(ActionEvent e){
@@ -153,17 +150,17 @@ public class Calculator implements ActionListener{
             num2 = Double.parseDouble(textField.getText());
             switch(operator) {
                 case '+':
-                    result = num1+num2;
-                    break;
+                result = num1+num2;
+                break;
                 case '-':
-                    result = num1-num2;
-                    break;
+                result = num1-num2;
+                break;
                 case 'x':
-                    result = num1*num2;
-                    break;
+                result = num1*num2;
+                break;
                 case '/':
-                    result = num1/num2;
-                    break;
+                result = num1/num2;
+                break;
             }
             textField.setText(String.valueOf(result));
             num1=result;
@@ -186,5 +183,9 @@ public class Calculator implements ActionListener{
             temp*=-1;
             textField.setText(String.valueOf(temp));
         }
+    }
+
+    public static void main(String[] args) {
+        new Calculator();
     }
 }
